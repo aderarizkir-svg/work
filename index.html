@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADERA RIZKI RAMADHAN | Portfolio Profesional</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#0284c7',
+                            600: '#025a87',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Animasi Kustom */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .dark .glass-effect {
+            background: rgba(15, 23, 42, 0.7);
+        }
+        
+        /* Kesan Hover Istimewa */
+        .hover-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hover-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        /* Garis Masa Pendidikan & Pengalaman */
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 15px;
+            width: 2px;
+            background: #e2e8f0;
+        }
+        .dark .timeline-line::before {
+            background: #334155;
+        }
+        
+        /* Animasi Muncul Semasa Skrol (Scroll Reveal) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 font-sans">
+
+    <!-- NAVIGASI UTAMA -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-slate-200/50 dark:border-slate-800/50 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#" class="text-xl font-extrabold tracking-wider text-slate-900 dark:text-white flex items-center gap-2">
+                <span class="bg-brand-500 text-white p-1.5 rounded-lg"><i data-lucide="terminal" class="w-5 h-5"></i></span>
+                ADERA<span class="text-brand-500">RIZKI</span>
+            </a>
+            
+            <!-- Menu Desktop -->
+            <nav class="hidden md:flex items-center gap-8 font-medium">
+                <a href="#profil" class="hover:text-brand-500 transition-colors">Profil</a>
+                <a href="#kemampuan" class="hover:text-brand-500 transition-colors">Kemahiran</a>
+                <a href="#pengalaman" class="hover:text-brand-500 transition-colors">Pengalaman</a>
+                <a href="#pendidikan" class="hover:text-brand-500 transition-colors">Pendidikan</a>
+                <a href="#hubungi" class="hover:text-brand-500 transition-colors">Hubungi</a>
+            </nav>
+
+            <!-- Kawalan Mod & Butang Menu Mobil -->
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors">
+                    <i id="theme-toggle-dark-icon" data-lucide="moon" class="w-5 h-5 hidden"></i>
+                    <i id="theme-toggle-light-icon" data-lucide="sun" class="w-5 h-5 hidden"></i>
+                </button>
+                
+                <button id="menu-btn" class="md:hidden p-2 text-slate-600 dark:text-slate-300">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menu Mobil -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 py-4 space-y-4 shadow-lg absolute w-full left-0">
+            <a href="#profil" class="block font-medium hover:text-brand-500 py-2">Profil</a>
+            <a href="#kemampuan" class="block font-medium hover:text-brand-500 py-2">Kemahiran</a>
+            <a href="#pengalaman" class="block font-medium hover:text-brand-500 py-2">Pengalaman</a>
+            <a href="#pendidikan" class="block font-medium hover:text-brand-500 py-2">Pendidikan</a>
+            <a href="#hubungi" class="block font-medium hover:text-brand-500 py-2">Hubungi</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION (PROFIL RINGKAS) -->
+    <section id="hero" class="pt-32 pb-20 md:py-40 flex items-center overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6 w-full grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+            
+            <!-- Teks Hero -->
+            <div class="md:col-span-7 space-y-6 text-center md:text-left order-2 md:order-1">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-500 dark:text-brand-400 font-semibold text-sm">
+                    <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
+                    Tersedia untuk Peluang Baru
+                </div>
+                
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight">
+                    Adera Rizki Ramadhan
+                </h1>
+                
+                <p class="text-xl md:text-2xl font-medium text-slate-600 dark:text-slate-300">
+                    Teknik Jaringan dan Komputer
+                </p>
+                
+                <p class="text-base sm:text-lg text-slate-500 dark:text-slate-400 max-w-xl mx-auto md:mx-0">
+                    Lulusan SMK Ganesa Jurusan Jaringan dan Komputer yang memiliki keterampilan pada jaringan dan organisasi yang baik. Berpengalaman dalam mengamankan jaringan, membuat kabel lan, dan penginstalan komputer.
+                </p>
+
+                <!-- Pautan Sosial & Tindakan -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-4">
+                    <a href="#hubungi" class="px-8 py-3.5 bg-brand-500 hover:bg-brand-600 text-white rounded-xl font-semibold shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 transition-all flex items-center justify-center gap-2">
+                        Hubungi Saya <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#pengalaman" class="px-8 py-3.5 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl font-semibold transition-all flex items-center justify-center gap-2">
+                        Lihat Pengalaman
+                    </a>
+                </div>
+            </div>
+
+            <!-- Kad Profil Estetik / Gambar -->
+            <div class="md:col-span-5 flex justify-center order-1 md:order-2">
+                <div class="relative group">
+                    <!-- Hiasan Belakang Gambar -->
+                    <div class="absolute -inset-1.5 bg-gradient-to-r from-brand-500 to-indigo-500 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
+                    
+                    <div class="relative bg-white dark:bg-slate-900 p-4 rounded-2xl shadow-xl max-w-[320px] sm:max-w-[360px] w-full text-center">
+                        <div class="relative w-48 h-48 mx-auto rounded-full overflow-hidden border-4 border-white dark:border-slate-800 shadow-md">
+                            <!-- Letakkan warna latar belakang merah seperti di foto asli untuk nuansa pas foto yang ikonik -->
+                            <div class="absolute inset-0 bg-[#D32F2F]"></div>
+                            <!-- SVG Lakaran Ilustrasi Lelaki Profesional sebagai ganti kepada imej fizikal -->
+                            <svg class="absolute bottom-0 w-full h-full text-white" viewBox="0 0 100 100" preserveAspectRatio="xMidYMax meet">
+                                <circle cx="50" cy="35" r="18" fill="#FCE8E6"/>
+                                <path d="M50 17c-6 0-10 4-10 10 0 1 .5 4 1 5 1-1 3-2 5-2s4 1 5 2c.5-1 1-4 1-5 0-6-4-10-10-10z" fill="#1A1A1A"/>
+                                <path d="M50 53c-15 0-25 8-25 18v29h50V71c0-10-10-18-25-18z" fill="#0D47A1"/>
+                                <path d="M50 53l-8 15h16z" fill="#FFFFFF"/>
+                                <path d="M50 59l-3 9h6z" fill="#1A1A1A"/>
+                            </svg>
+                        </div>
+                        
+                        <div class="mt-6 space-y-1">
+                            <h3 class="font-bold text-lg text-slate-900 dark:text-white">Adera Rizki Ramadhan</h3>
+                            <p class="text-sm text-brand-500 font-medium">Teknik Jaringan dan Komputer</p>
+                        </div>
+
+                        <!-- Info Kad Segera -->
+                        <div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800 grid grid-cols-2 gap-4 text-left">
+                            <div class="flex items-center gap-2.5">
+                                <span class="p-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-brand-500">
+                                    <i data-lucide="map-pin" class="w-4 h-4"></i>
+                                </span>
+                                <div>
+                                    <p class="text-[10px] text-slate-400 font-medium">LOKASI</p>
+                                    <p class="text-xs font-bold text-slate-700 dark:text-slate-300">Sukabumi, Jabar</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2.5">
+                                <span class="p-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-brand-500">
+                                    <i data-lucide="shield-check" class="w-4 h-4"></i>
+                                </span>
+                                <div>
+                                    <p class="text-[10px] text-slate-400 font-medium">SMK</p>
+                                    <p class="text-xs font-bold text-slate-700 dark:text-slate-300">Ganesa Cijalingan</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- STRIP INFO HUBUNGI (CEPAT & MUDAH) -->
+    <section class="py-10 bg-white dark:bg-slate-900 border-y border-slate-100 dark:border-slate-800/60 shadow-sm">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div class="flex items-center gap-4 justify-center sm:justify-start">
+                <span class="p-3 rounded-xl bg-brand-50 dark:bg-brand-950 text-brand-500">
+                    <i data-lucide="phone" class="w-6 h-6"></i>
+                </span>
+                <div>
+                    <h4 class="text-xs font-semibold text-slate-400">TELEFON / WHATSAPP</h4>
+                    <p class="text-base font-bold text-slate-800 dark:text-slate-100">0851-2634-4150</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4 justify-center sm:justify-start border-y sm:border-y-0 sm:border-x border-slate-100 dark:border-slate-800 py-4 sm:py-0 sm:px-6">
+                <span class="p-3 rounded-xl bg-brand-50 dark:bg-brand-950 text-brand-500">
+                    <i data-lucide="mail" class="w-6 h-6"></i>
+                </span>
+                <div>
+                    <h4 class="text-xs font-semibold text-slate-400">EMEL UTAMA</h4>
+                    <p class="text-base font-bold text-slate-800 dark:text-slate-100">aderarizkir@gmail.com</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4 justify-center sm:justify-start">
+                <span class="p-3 rounded-xl bg-brand-50 dark:bg-brand-950 text-brand-500">
+                    <i data-lucide="map-pin" class="w-6 h-6"></i>
+                </span>
+                <div>
+                    <h4 class="text-xs font-semibold text-slate-400">ALAMAT ASAL</h4>
+                    <p class="text-base font-bold text-slate-800 dark:text-slate-100 font-medium">Sukabumi, Jawa Barat</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION PROFIL & TENTANG SAYA -->
+    <section id="profil" class="py-24 max-w-6xl mx-auto px-6 reveal">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+            
+            <div class="md:col-span-5 space-y-4">
+                <span class="text-brand-500 font-bold uppercase tracking-wider text-sm">Tentang Saya</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">Profil Profesional & Dedikasi Kerja</h2>
+                <p class="text-slate-600 dark:text-slate-300">
+                    Berbekalkan latar belakang pendidikan vokasional dalam bidang Teknik Jaringan dan Komputer (TKJ), saya sentiasa bermotivasi tinggi untuk memberikan penyelesaian IT yang terbaik. 
+                </p>
+                <div class="p-4 bg-brand-50/50 dark:bg-brand-900/10 border-l-4 border-brand-500 rounded-r-xl">
+                    <p class="italic text-slate-600 dark:text-slate-300 text-sm">
+                        "Telah mengikuti pelbagai kursus luaran untuk memperkuat keupayaan profesional, termasuk penguasaan intensif perisian Microsoft Office untuk kerja pentadbiran."
+                    </p>
+                </div>
+            </div>
+
+            <div class="md:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Kad Ciri 1 -->
+                <div class="p-6 bg-white dark:bg-slate-900 rounded-2xl shadow-sm hover-card border border-slate-100 dark:border-slate-800">
+                    <span class="p-3 bg-blue-50 dark:bg-blue-900/20 text-blue-500 rounded-xl inline-block mb-4">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
+                    </span>
+                    <h3 class="text-lg font-bold mb-2">Keselamatan Jaringan</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Mahir dalam mengkonfigurasi keselamatan rangkaian asas untuk mengelakkan serangan siber yang tidak diingini.</p>
+                </div>
+                <!-- Kad Ciri 2 -->
+                <div class="p-6 bg-white dark:bg-slate-900 rounded-2xl shadow-sm hover-card border border-slate-100 dark:border-slate-800">
+                    <span class="p-3 bg-purple-50 dark:bg-purple-900/20 text-purple-500 rounded-xl inline-block mb-4">
+                        <i data-lucide="network" class="w-6 h-6"></i>
+                    </span>
+                    <h3 class="text-lg font-bold mb-2">Penyambungan Kabel LAN</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Berkemampuan tinggi dalam melakukan pengetiman dan pembuatan kabel rangkaian (LAN) dengan sangat pantas.</p>
+                </div>
+                <!-- Kad Ciri 3 -->
+                <div class="p-6 bg-white dark:bg-slate-900 rounded-2xl shadow-sm hover-card border border-slate-100 dark:border-slate-800">
+                    <span class="p-3 bg-amber-50 dark:bg-amber-900/20 text-amber-500 rounded-xl inline-block mb-4">
+                        <i data-lucide="monitor" class="w-6 h-6"></i>
+                    </span>
+                    <h3 class="text-lg font-bold mb-2">Pemasangan Sistem</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Mahir mengendalikan penginstalan sistem operasi Windows, penginstalan perkakasan (hardware), serta pemacu komputer.</p>
+                </div>
+                <!-- Kad Ciri 4 -->
+                <div class="p-6 bg-white dark:bg-slate-900 rounded-2xl shadow-sm hover-card border border-slate-100 dark:border-slate-800">
+                    <span class="p-3 bg-green-50 dark:bg-green-900/20 text-green-500 rounded-xl inline-block mb-4">
+                        <i data-lucide="users" class="w-6 h-6"></i>
+                    </span>
+                    <h3 class="text-lg font-bold mb-2">Kerjasama & Pentadbiran</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Memiliki kemahiran pengurusan organisasi dan pentadbiran sekolah yang disahkan melalui tugasan pantas & tepat.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION KEMAMPUAN (DENGAN VISUAL PROGRESS) -->
+    <section id="kemampuan" class="py-24 bg-slate-100 dark:bg-slate-900/40 reveal">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                <span class="text-brand-500 font-bold uppercase tracking-wider text-sm">Kemahiran Utama</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">Apakah yang Boleh Saya Lakukan?</h2>
+                <p class="text-slate-500 dark:text-slate-400">Tahap kemahiran teknikal yang telah saya asah sepanjang sesi pembelajaran teori dan latihan praktikal di industri.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Kemahiran Teknikal -->
+                <div class="bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 space-y-6">
+                    <h3 class="text-xl font-bold flex items-center gap-2 text-slate-900 dark:text-white">
+                        <span class="p-2 bg-brand-50 dark:bg-brand-950 text-brand-500 rounded-lg"><i data-lucide="wrench" class="w-5 h-5"></i></span>
+                        Kemahiran Teknikal Rangkaian
+                    </h3>
+                    
+                    <!-- Skill 1 -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm font-semibold">
+                            <span>Pembuatan Kabel LAN (Uji Kelajuan Cepat)</span>
+                            <span class="text-brand-500">95%</span>
+                        </div>
+                        <div class="w-full h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                            <div class="h-full bg-brand-500 rounded-full transition-all duration-1000" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Skill 2 -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm font-semibold">
+                            <span>Penginstalan & Konfigurasi Windows</span>
+                            <span class="text-brand-500">90%</span>
+                        </div>
+                        <div class="w-full h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                            <div class="h-full bg-brand-500 rounded-full transition-all duration-1000" style="width: 90%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Skill 3 -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm font-semibold">
+                            <span>Keselamatan & Pengurusan Rangkaian</span>
+                            <span class="text-brand-500">85%</span>
+                        </div>
+                        <div class="w-full h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                            <div class="h-full bg-brand-500 rounded-full transition-all duration-1000" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kemahiran Produktiviti & Reka Bentuk -->
+                <div class="bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 space-y-6">
+                    <h3 class="text-xl font-bold flex items-center gap-2 text-slate-900 dark:text-white">
+                        <span class="p-2 bg-purple-50 dark:bg-purple-950 text-purple-500 rounded-lg"><i data-lucide="file-spreadsheet" class="w-5 h-5"></i></span>
+                        Produktiviti & Reka Bentuk
+                    </h3>
+
+                    <!-- Skill 1 -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm font-semibold">
+                            <span>Microsoft Word & Excel (Pentadbiran)</span>
+                            <span class="text-brand-500">90%</span>
+                        </div>
+                        <div class="w-full h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                            <div class="h-full bg-purple-500 rounded-full transition-all duration-1000" style="width: 90%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Skill 2 -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm font-semibold">
+                            <span>Penyuntingan Logo & Reka Bentuk Kreatif</span>
+                            <span class="text-brand-500">80%</span>
+                        </div>
+                        <div class="w-full h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                            <div class="h-full bg-purple-500 rounded-full transition-all duration-1000" style="width: 80%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Skill 3 -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm font-semibold">
+                            <span>Menyablon Baju, Plastik & Kadbod</span>
+                            <span class="text-brand-500">85%</span>
+                        </div>
+                        <div class="w-full h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                            <div class="h-full bg-purple-500 rounded-full transition-all duration-1000" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION PENGALAMAN -->
+    <section id="pengalaman" class="py-24 max-w-6xl mx-auto px-6 reveal">
+        <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+            <span class="text-brand-500 font-bold uppercase tracking-wider text-sm">Pengalaman Saya</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">Latar Belakang Kerja & Praktikal</h2>
+            <p class="text-slate-500 dark:text-slate-400">Perjalanan kerja industri dan sumbangan aktif saya dalam organisasi sekolah.</p>
+        </div>
+
+        <div class="max-w-3xl mx-auto relative timeline-line pl-8 space-y-12">
+            
+            <!-- Pengalaman 1 -->
+            <div class="relative group">
+                <!-- Bullet Point -->
+                <div class="absolute -left-[25px] top-1.5 w-4 h-4 rounded-full bg-brand-500 ring-4 ring-brand-50 dark:ring-brand-950/50 group-hover:scale-125 transition-transform"></div>
+                
+                <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 hover-card">
+                    <span class="text-xs font-semibold px-2.5 py-1 bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 rounded-full">LATIHAN INDUSTRI (PKL)</span>
+                    <h3 class="text-xl font-bold mt-2 text-slate-900 dark:text-white">Praktek Kerja Lapangan</h3>
+                    <p class="text-sm font-semibold text-slate-500 dark:text-slate-400">Syarikat Prinperpack</p>
+                    
+                    <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-400">
+                        <li class="flex items-start gap-2">
+                            <span class="text-brand-500 mt-0.5"><i data-lucide="check" class="w-4 h-4"></i></span>
+                            Terlibat secara aktif dalam aktiviti menyablon baju, plastik, serta kadbod pembungkusan secara profesional.
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-brand-500 mt-0.5"><i data-lucide="check" class="w-4 h-4"></i></span>
+                            Melakukan kerja-kerja reka bentuk digital seperti penyuntingan logo komersial dan reka bentuk surat jemputan korporat.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Pengalaman 2 -->
+            <div class="relative group">
+                <!-- Bullet Point -->
+                <div class="absolute -left-[25px] top-1.5 w-4 h-4 rounded-full bg-purple-500 ring-4 ring-purple-50 dark:ring-purple-950/50 group-hover:scale-125 transition-transform"></div>
+                
+                <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 hover-card">
+                    <span class="text-xs font-semibold px-2.5 py-1 bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-full">JANUARI 2026 – JUN 2026</span>
+                    <h3 class="text-xl font-bold mt-2 text-slate-900 dark:text-white">Panitia Administrasi</h3>
+                    <p class="text-sm font-semibold text-slate-500 dark:text-slate-400">Aktiviti Sekolah SMK Ganesa</p>
+                    
+                    <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-400">
+                        <li class="flex items-start gap-2">
+                            <span class="text-purple-500 mt-0.5"><i data-lucide="check" class="w-4 h-4"></i></span>
+                            Menyusun pangkalan data peserta aktiviti sekolah secara sistematik menggunakan kelebihan perisian hamparan kerja (Excel).
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-purple-500 mt-0.5"><i data-lucide="check" class="w-4 h-4"></i></span>
+                            Menguruskan logistik penting dan memastikan keperluan pentadbiran berjalan lancar sepanjang acara berlangsung.
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-purple-500 mt-0.5"><i data-lucide="check" class="w-4 h-4"></i></span>
+                            Berjaya menyelesaikan tugasan khas pengurusan data dalam tempoh waktu yang singkat dengan ketepatan data yang sangat tinggi.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION PENDIDIKAN -->
+    <section id="pendidikan" class="py-24 bg-slate-100 dark:bg-slate-900/40 reveal">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                <span class="text-brand-500 font-bold uppercase tracking-wider text-sm">Pendidikan</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">Sejarah Akademik</h2>
+                <p class="text-slate-500 dark:text-slate-400">Senarai institusi rasmi tempat saya menimba ilmu dan membina jati diri.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- SD -->
+                <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800/80 hover-card flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-500 mb-6">
+                            <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-900 dark:text-white">SD Cimahi Selajambe</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Pendidikan Dasar Pertama</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/60 flex justify-between items-center text-xs font-semibold text-slate-400">
+                        <span>LOKASI: SUKABUMI</span>
+                        <span class="text-blue-500">2017 - 2020</span>
+                    </div>
+                </div>
+
+                <!-- SMP -->
+                <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800/80 hover-card flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-500 mb-6">
+                            <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-900 dark:text-white">SMP Darul Fallah Selajambe</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Pendidikan Menengah Pertama</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/60 flex justify-between items-center text-xs font-semibold text-slate-400">
+                        <span>LOKASI: SUKABUMI</span>
+                        <span class="text-emerald-500">2020 - 2023</span>
+                    </div>
+                </div>
+
+                <!-- SMK -->
+                <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800/80 hover-card flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-brand-500/10 rounded-full blur-xl"></div>
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-brand-50 dark:bg-brand-900/30 flex items-center justify-center text-brand-500 mb-6">
+                            <i data-lucide="award" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-900 dark:text-white">SMK Ganesa Cijalingan</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Teknik Jaringan dan Komputer</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/60 flex justify-between items-center text-xs font-semibold text-slate-400">
+                        <span>LOKASI: SUKABUMI</span>
+                        <span class="text-brand-500">2023 - 2026</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION HUBUNGI SAYA -->
+    <section id="hubungi" class="py-24 max-w-6xl mx-auto px-6 reveal">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 bg-white dark:bg-slate-900 p-8 sm:p-12 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-800">
+            
+            <div class="lg:col-span-5 space-y-6">
+                <span class="text-brand-500 font-bold uppercase tracking-wider text-sm">Hubungi Saya</span>
+                <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white">Mari Berbincang & Berkolaborasi</h2>
+                <p class="text-slate-500 dark:text-slate-400">
+                    Sama ada anda mempunyai pertanyaan mengenai jawatan kosong atau ingin menawarkan projek rangkaian / pentadbiran pejabat, pintu saya sentiasa terbuka.
+                </p>
+
+                <div class="space-y-4 pt-4">
+                    <a href="https://wa.me/6285126344150" target="_blank" class="flex items-center gap-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                        <span class="p-3 bg-green-500/10 text-green-500 rounded-lg">
+                            <i data-lucide="message-square" class="w-6 h-6"></i>
+                        </span>
+                        <div>
+                            <p class="text-xs text-slate-400 font-bold">HANTAR MESEJ WHATSAPP</p>
+                            <p class="text-sm font-bold text-slate-700 dark:text-slate-300">0851-2634-4150</p>
+                        </div>
+                    </a>
+
+                    <div class="flex items-center gap-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+                        <span class="p-3 bg-brand-500/10 text-brand-500 rounded-lg">
+                            <i data-lucide="clock" class="w-6 h-6"></i>
+                        </span>
+                        <div>
+                            <p class="text-xs text-slate-400 font-bold">WAKTU RESPON</p>
+                            <p class="text-sm font-bold text-slate-700 dark:text-slate-300">Kiraan Minit (Sangat Pantas)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Borang Interaktif -->
+            <div class="lg:col-span-7">
+                <form id="contactForm" class="space-y-5">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <label class="text-sm font-semibold text-slate-600 dark:text-slate-300">Nama Penuh Anda</label>
+                            <input type="text" id="name" required class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 dark:focus:ring-brand-500 transition-all text-sm">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-semibold text-slate-600 dark:text-slate-300">Alamat Emel</label>
+                            <input type="email" id="email" required class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 dark:focus:ring-brand-500 transition-all text-sm">
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <label class="text-sm font-semibold text-slate-600 dark:text-slate-300">Subjek Mesej</label>
+                        <input type="text" id="subject" required class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 dark:focus:ring-brand-500 transition-all text-sm">
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-sm font-semibold text-slate-600 dark:text-slate-300">Isi Kandungan Mesej</label>
+                        <textarea id="message" rows="4" required class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 dark:focus:ring-brand-500 transition-all text-sm"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-3.5 bg-brand-500 hover:bg-brand-600 text-white rounded-xl font-bold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                        Hantar Mesej Sekarang <i data-lucide="send" class="w-4 h-4"></i>
+                    </button>
+                </form>
+
+                <!-- Custom Modal / Kotak Mesej Kejayaan -->
+                <div id="success-alert" class="hidden mt-4 p-4 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 rounded-xl border border-emerald-100 dark:border-emerald-800/50 flex items-center gap-3">
+                    <i data-lucide="check-circle" class="w-5 h-5 text-emerald-500"></i>
+                    <span class="text-sm font-medium">Terima kasih! Mesej anda telah berjaya dihantar ke aderarizkir@gmail.com!</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 bg-slate-900 text-slate-400 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <p class="text-lg font-bold text-white mb-1">Adera Rizki Ramadhan</p>
+                <p class="text-xs">Jurusan Teknik Jaringan dan Komputer</p>
+            </div>
+            
+            <p class="text-xs text-center">&copy; 2026 Adera Rizki Ramadhan. Hak Cipta Terpelihara. Dipersembahkan dengan reka bentuk yang estetik.</p>
+            
+            <div class="flex items-center gap-4">
+                <a href="mailto:aderarizkir@gmail.com" class="p-2 rounded-full bg-slate-800 hover:bg-brand-500 hover:text-white transition-all"><i data-lucide="mail" class="w-4 h-4"></i></a>
+                <a href="tel:085126344150" class="p-2 rounded-full bg-slate-800 hover:bg-brand-500 hover:text-white transition-all"><i data-lucide="phone" class="w-4 h-4"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SKRIP UNTUK LOGIK SISTEM -->
+    <script>
+        // Inisialisasi Ikon Lucide
+        lucide.createIcons();
+
+        // Menu Mobil
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Mod Gelap / Cerah (Light & Dark Mode)
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        
+        // Tetapan asal berasaskan sistem operasi pembaca atau kegemaran lepas
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+
+        const themeToggleBtn = document.getElementById('theme-toggle');
+
+        themeToggleBtn.addEventListener('click', function() {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
+
+        // Kesan Pendedahan Elemen semasa Skrol (Scroll Reveal)
+        function revealElements() {
+            const reveals = document.querySelectorAll('.reveal');
+            for (let i = 0; i < reveals.length; i++) {
+                let windowHeight = window.innerHeight;
+                let elementTop = reveals[i].getBoundingClientRect().top;
+                let elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        
+        window.addEventListener('scroll', revealElements);
+        // Jalankan sekali semasa pertama kali dilayari
+        window.addEventListener('load', revealElements);
+
+        // Borang Hubungi & Simulasi Penghantaran
+        const contactForm = document.getElementById('contactForm');
+        const successAlert = document.getElementById('success-alert');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Simulasi penghantaran mesej berjaya
+            successAlert.classList.remove('hidden');
+            contactForm.reset();
+            
+            // Sembunyikan amaran selepas 6 saat
+            setTimeout(() => {
+                successAlert.classList.add('hidden');
+            }, 6000);
+        });
+    </script>
+</body>
+</html>
